@@ -244,12 +244,12 @@ Az elkészült program beadása a Canvasen történik, és két dolgot kell ide 
 - [x] Navigáció: Navigáció megfelelően változik a be- és kijelentkezésnek megfelelően (1pt)
 - [x] Navigáció: Az oldal kezeli, hogy munkáltatóként vagy munkavállalóként jelentkezünk be, más más navigációt jelenít meg (1pt)
 - [ ] Főoldal: A Főoldal megjelenik a keresővel (1pt)
-- [ ] Főoldal: Az oldalon kilistázza a meghirdetett állásokat (1pt)
+- [x] Főoldal: Az oldalon kilistázza a meghirdetett állásokat (1pt)
 - [ ] Főoldal: Az oldalon lehet szűrni az állásokra (2pt)
-- [ ] Főoldal: Az állásokra kattintva átvisz minket az alkalmazás az álláshirdetés részletező oldalára, ahol az ahhoz tartozó adatok jelennek meg (2pt)
-- [ ] Regisztráció: A regisztráció működik (1pt)
+- [x] Főoldal: Az állásokra kattintva átvisz minket az alkalmazás az álláshirdetés részletező oldalára, ahol az ahhoz tartozó adatok jelennek meg (2pt)
+- [x] Regisztráció: A regisztráció működik (1pt)
 - [x] Regisztráció: A felhasználó munkavállalóként és munkáltatóként is regisztrálhat, különböző mezők jelennek meg a leendő fiók típusától függően (3pt)
-- [ ] Regisztráció: Munkavállaló regisztráció esetén a felhasználó meg tudja adni a tapasztalatait (2pt)
+- [x] Regisztráció: Munkavállaló regisztráció esetén a felhasználó meg tudja adni a tapasztalatait (2pt)
 - [x] Bejelentkezés: Bejelentkezés működik (1pt)
 - [ ] Munkavállaló - Profilom: Látszódnak a munkavállaló adatai (név, email cím), és az oldalon kilistázza az előző munkahelyeket (1pt)
 - [ ] Munkavállaló - Profilom: A korábban hozzáadott munkatapasztalatok szerkeszthetőek (1pt)
@@ -262,7 +262,7 @@ Az elkészült program beadása a Canvasen történik, és két dolgot kell ide 
 - [ ] Munkáltató - Profilom: Álláshirdetés szerkesztése működik (2pt)
 - [ ] Profilom: Kijelentkezés gomb működik(1pt)
 - [ ] Igényes megjelenés (2pt)
-7/30
+13/30
 Összesen: 30 pont (Minimum: 12 pont)
 
 - [ ] Plusz feladat: az álláshirdetések listája infinite-scrollinggal jelenik meg (+2pt)

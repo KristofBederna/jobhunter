@@ -11,5 +11,3 @@ export const setUser = (user) => ({
 export const clearUser = () => ({
   type: CLEAR_USER
 });
-
-// You can also define async actions if needed
