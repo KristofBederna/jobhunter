@@ -9,8 +9,8 @@ const NavBar = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    dispatch(clearUser()); // Dispatch the action to clear user data
-    // Additional logout logic here (e.g., API call, clear localStorage, etc.)
+    dispatch(clearUser());
+    localStorage.clear();
     navigate('/login');
   };
 

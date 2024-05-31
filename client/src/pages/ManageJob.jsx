@@ -38,7 +38,7 @@ const ManageJob = () => {
 
   return (
     <div>
-      <h1>Manage Job</h1>
+      <h1>New listing</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label>
