@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserProfile, fetchUserExperiences } from '../actions/userActions';
+import { fetchUserProfile, fetchUserExperiences, modifyUserExperience } from '../actions/userActions';
 import { fetchJobsByUserId, deleteJob, modifyJob } from '../actions/jobActions';
 import { useNavigate } from 'react-router-dom';
 
@@ -23,16 +23,32 @@ const Profile = () => {
     homeOffice: false
   });
 
-  useEffect(() => {
-    if (userId) {
-      dispatch(fetchUserProfile(userId));
-      if (user.role === 'company') {
-        dispatch(fetchJobsByUserId(userId));
-      } else {
-        dispatch(fetchUserExperiences(userId));
-      }
-    }
-  }, [dispatch, userId, user.role]);
+  const [editingExperience, setEditingExperience] = useState(null);
+  const [experienceFormData, setExperienceFormData] = useState({
+    company: '',
+    title: '',
+    interval: ''
+  });
+
+  const handleModifyExperience = (experienceId, initialData) => {
+    setEditingExperience(experienceId);
+    setExperienceFormData(initialData);
+  };
+
+  const handleFormChangeExperience = (e) => {
+    const { name, value } = e.target;
+    setExperienceFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleFormSubmitExperience = (e) => {
+    e.preventDefault();
+    dispatch(modifyUserExperience(editingExperience, experienceFormData));
+    console.log(experienceFormData);
+    setEditingExperience(null);
+  };
 
   const handleDelete = (jobId) => {
     dispatch(deleteJob(jobId));
@@ -72,6 +88,17 @@ const Profile = () => {
     setEditingJob(null);
   };
 
+  useEffect(() => {
+    if (userId) {
+      dispatch(fetchUserProfile(userId));
+      if (user.role === 'company') {
+        dispatch(fetchJobsByUserId(userId));
+      } else {
+        dispatch(fetchUserExperiences(userId));
+      }
+    }
+  }, [dispatch, userId, user.role, editingExperience]);
+
   if (user.loadingProfile) return <p>Loading profile...</p>;
   if (user.errorProfile) return <p>Error: {user.errorProfile}</p>;
   if (jobsLoading) return <p>Loading jobs...</p>;
@@ -79,6 +106,7 @@ const Profile = () => {
   const handleManageJob = () => {
     navigate('/manageJob');
   };
+
   return (
     <div>
       <h1>Profile</h1>
@@ -175,9 +203,38 @@ const Profile = () => {
           <ul>
             {user.experiences.map((exp) => (
               <li key={exp.id}>
-                <h4>{exp.position} at {exp.company}</h4>
-                <p>{exp.description}</p>
-                <p>{exp.startDate} - {exp.endDate}</p>
+                <h4>{exp.title} at {exp.company}</h4>
+                <p>{exp.interval}</p>
+                {editingExperience === exp.id ? (
+                  <form onSubmit={handleFormSubmitExperience}>
+                    <input
+                      type="text"
+                      name="company"
+                      value={experienceFormData.company}
+                      onChange={handleFormChangeExperience}
+                      placeholder="Company"
+                    />
+                    <input
+                      type="text"
+                      name="title"
+                      value={experienceFormData.title}
+                      onChange={handleFormChangeExperience}
+                      placeholder="Title"
+                    />
+                    <input
+                      type="text"
+                      name="interval"
+                      value={experienceFormData.interval}
+                      onChange={handleFormChangeExperience}
+                      placeholder="Interval"
+                    />
+                    <button type="submit">Save</button>
+                  </form>
+                ) : (
+                  <button onClick={() => handleModifyExperience(exp.id, { company: exp.company, title: exp.title, interval: exp.interval })}>
+                    Modify
+                  </button>
+                )}
               </li>
             ))}
           </ul>
