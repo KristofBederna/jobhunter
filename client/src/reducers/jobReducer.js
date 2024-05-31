@@ -4,20 +4,25 @@ import {
   FETCH_JOBS_FAILURE,
   FETCH_JOB_REQUEST,
   FETCH_JOB_SUCCESS,
-  FETCH_JOB_FAILURE
+  FETCH_JOB_FAILURE,
+  CREATE_JOB_REQUEST,
+  CREATE_JOB_SUCCESS,
+  CREATE_JOB_FAILURE
 } from '../actions/jobActionTypes';
 
 const initialState = {
   jobs: [],
   job: null,
   loading: false,
-  error: null
+  error: null,
+  createJobSuccess: null
 };
 
 const jobReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_JOBS_REQUEST:
     case FETCH_JOB_REQUEST:
+    case CREATE_JOB_REQUEST:
       return {
         ...state,
         loading: true,
@@ -35,8 +40,16 @@ const jobReducer = (state = initialState, action) => {
         job: action.payload,
         loading: false
       };
+    case CREATE_JOB_SUCCESS:
+      return {
+        ...state,
+        jobs: [...state.jobs, action.payload],
+        loading: false,
+        createJobSuccess: 'Job created successfully'
+      };
     case FETCH_JOBS_FAILURE:
     case FETCH_JOB_FAILURE:
+    case CREATE_JOB_FAILURE:
       return {
         ...state,
         loading: false,
