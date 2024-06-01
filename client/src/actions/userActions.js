@@ -10,6 +10,9 @@ export const FETCH_USER_EXPERIENCES_FAILURE = 'FETCH_USER_EXPERIENCES_FAILURE';
 export const MODIFY_USER_EXPERIENCE_REQUEST = 'MODIFY_USER_EXPERIENCE_REQUEST';
 export const MODIFY_USER_EXPERIENCE_SUCCESS = 'MODIFY_USER_EXPERIENCE_SUCCESS';
 export const MODIFY_USER_EXPERIENCE_FAILURE = 'MODIFY_USER_EXPERIENCE_FAILURE';
+export const APPLY_TO_JOB_REQUEST = 'APPLY_TO_JOB_REQUEST';
+export const APPLY_TO_JOB_SUCCESS = 'APPLY_TO_JOB_SUCCESS';
+export const APPLY_TO_JOB_FAILURE = 'APPLY_TO_JOB_FAILURE';
 
 
 // Action Creators
@@ -95,3 +98,31 @@ export const modifyUserExperience = (experienceId, updatedExperience) => async (
   }
 };
 
+export const applyToJob = (id, responseDiv) => {
+  return async (dispatch) => {
+    dispatch({ type: APPLY_TO_JOB_REQUEST });
+
+    try {
+      const response = await fetch('http://localhost:3030/applicants', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+        body: JSON.stringify({ "jobId": id }),
+      });
+
+      if (response.ok) {
+        dispatch({ type: APPLY_TO_JOB_SUCCESS });
+        console.log('Application successful');
+        responseDiv.innerHTML = "Application successful";
+      } else {
+        dispatch({ type: APPLY_TO_JOB_FAILURE, payload: 'Failed to apply to job' });
+        console.error('Application failed');
+      }
+    } catch (error) {
+      dispatch({ type: APPLY_TO_JOB_FAILURE, payload: error.message });
+      console.error('Error applying:', error);
+    }
+  };
+};

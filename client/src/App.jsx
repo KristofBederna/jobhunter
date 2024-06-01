@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useSelector } from 'react-redux'; // Import the useSelector hook
+import { useSelector } from 'react-redux';
 import './App.css'
 import Home from './pages/Home';
 import NoPage from './pages/NoPage';
@@ -8,8 +8,8 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import ManageJob from './pages/ManageJob';
-import JobList from './components/JobList'; // Import JobList component
-import JobDetail from './components/JobDetail'; // Import JobDetail component
+import JobList from './components/JobList';
+import JobDetail from './components/JobDetail';
 
 function App() {
   const user = useSelector((state) => state.user); // Access user data from Redux store

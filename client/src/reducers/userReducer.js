@@ -1,3 +1,5 @@
+// userReducer.js
+
 import {
   SET_USER,
   CLEAR_USER,
@@ -6,7 +8,10 @@ import {
   FETCH_USER_PROFILE_FAILURE,
   FETCH_USER_EXPERIENCES_REQUEST,
   FETCH_USER_EXPERIENCES_SUCCESS,
-  FETCH_USER_EXPERIENCES_FAILURE
+  FETCH_USER_EXPERIENCES_FAILURE,
+  APPLY_TO_JOB_REQUEST,
+  APPLY_TO_JOB_SUCCESS,
+  APPLY_TO_JOB_FAILURE,
 } from '../actions/userActions';
 
 const initialState = {
@@ -18,7 +23,9 @@ const initialState = {
   loadingExperiences: false,
   errorProfile: null,
   errorExperiences: null,
-  experiences: []
+  experiences: [],
+  applyingToJob: false,
+  applyToJobError: null,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -67,6 +74,23 @@ const userReducer = (state = initialState, action) => {
         ...state,
         loadingExperiences: false,
         errorExperiences: action.payload
+      };
+    case APPLY_TO_JOB_REQUEST:
+      return {
+        ...state,
+        applyingToJob: true,
+        applyToJobError: null,
+      };
+    case APPLY_TO_JOB_SUCCESS:
+      return {
+        ...state,
+        applyingToJob: false,
+      };
+    case APPLY_TO_JOB_FAILURE:
+      return {
+        ...state,
+        applyingToJob: false,
+        applyToJobError: action.payload,
       };
     default:
       return state;

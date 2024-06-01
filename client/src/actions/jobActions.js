@@ -13,7 +13,7 @@ import {
   DELETE_JOB_FAILURE,
   MODIFY_JOB_REQUEST,
   MODIFY_JOB_SUCCESS,
-  MODIFY_JOB_FAILURE
+  MODIFY_JOB_FAILURE,
 } from './jobActionTypes';
 
 // Fetch all jobs

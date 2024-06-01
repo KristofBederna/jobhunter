@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserProfile, fetchUserExperiences, modifyUserExperience } from '../actions/userActions';
 import { fetchJobsByUserId, deleteJob, modifyJob } from '../actions/jobActions';
+import { fetchApplicants } from '../actions/applicantActions';
 import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
@@ -9,7 +10,10 @@ const Profile = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const { jobs, loading: jobsLoading, error: jobsError } = useSelector((state) => state.jobs);
+  const { applicants, loading: applicantsLoading, error: applicantsError } = useSelector((state) => state.applicants);
   const userId = user.id; // Assuming user ID is stored in state.user.id
+  const [currentlyViewingApplicants, setCurrentlyViewingApplicants] = useState(false);
+  const [viewedJob, setViewedJob] = useState(null);
 
   const [editingJob, setEditingJob] = useState(null);
   const [jobFormData, setJobFormData] = useState({
@@ -46,7 +50,6 @@ const Profile = () => {
   const handleFormSubmitExperience = (e) => {
     e.preventDefault();
     dispatch(modifyUserExperience(editingExperience, experienceFormData));
-    console.log(experienceFormData);
     setEditingExperience(null);
   };
 
@@ -69,16 +72,21 @@ const Profile = () => {
   };
 
   const handleView = (jobId) => {
-    navigate(`/jobs/${jobId}`);
+    if (currentlyViewingApplicants) {
+      setCurrentlyViewingApplicants(false);
+      setViewedJob(null);
+      return;
+    }
+    setCurrentlyViewingApplicants(true);
+    setViewedJob(jobId);
+    dispatch(fetchApplicants(parseInt(jobId)));
   };
 
   const handleFormChange = (e) => {
     const { name, value, type, checked } = e.target;
     setJobFormData((prev) => ({
       ...prev,
-      [name]: (name === 'salaryTo' ? parseFloat(value) : value),
-      [name]: type === 'checkbox' ? checked : (name === 'salaryFrom' ? parseFloat(value) : value)
-
+      [name]: type === 'checkbox' ? checked : (name === 'salaryFrom' || name === 'salaryTo' ? parseFloat(value) : value)
     }));
   };
 
@@ -103,12 +111,13 @@ const Profile = () => {
   if (user.errorProfile) return <p>Error: {user.errorProfile}</p>;
   if (jobsLoading) return <p>Loading jobs...</p>;
   if (jobsError) return <p>Error: {jobsError}</p>;
+
   const handleManageJob = () => {
     navigate('/manageJob');
   };
 
   return (
-    <div>
+    <div className='background'>
       <h1>Profile</h1>
       <h2>Name: {user.fullname}</h2>
       <p>Email: {user.email}</p>
@@ -124,10 +133,21 @@ const Profile = () => {
                 <p>Location: {job.city}</p>
                 <p>Salary: {job.salaryFrom} - {job.salaryTo}</p>
                 <p>{job.type}</p>
-                <p>Home office: {job.homeOffice % 2 == 1 ? "Yes" : "No"}</p>
-                <button onClick={() => handleView(job.id)}>View</button>
+                <p>Home office: {job.homeOffice % 2 === 1 ? "Yes" : "No"}</p>
+                <button disabled={job.id == viewedJob ? false : currentlyViewingApplicants} onClick={() => handleView(job.id)}>View</button>
                 <button onClick={() => handleEdit(job)}>Modify</button>
                 <button onClick={() => handleDelete(job.id)}>Delete</button>
+                {applicants.length > 0 && job.id === viewedJob ? <ul>
+                  {applicants.map((applicant) => (
+                    <li key={applicant.user.id}>
+                      <p>{applicant.user.email}</p>
+                      <p>{applicant.user.fullname}</p>
+                    </li>
+                  ))
+                  }
+                </ul>
+                  :
+                  <></>}
                 {editingJob === job.id && (
                   <form onSubmit={handleFormSubmit}>
                     <input
