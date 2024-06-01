@@ -82,7 +82,7 @@ const JobList = () => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div>
+    <>
       <h2>Available Jobs</h2>
       <div>
         <input
@@ -121,7 +121,7 @@ const JobList = () => {
               <label>
                 Job Type:
                 <select
-                  name="jobType"
+                  name="type"
                   value={filters.type}
                   onChange={handleFilterChange}
                 >
@@ -173,7 +173,7 @@ const JobList = () => {
           </div>
         ))}
       </ul>
-    </div>
+    </>
   );
 };
 export default JobList;
