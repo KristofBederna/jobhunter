@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate, Outlet } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { clearUser } from '../actions/userActions';
+import { clearUser } from '../../actions/userActions';
 
 const NavBar = () => {
   const navigate = useNavigate();

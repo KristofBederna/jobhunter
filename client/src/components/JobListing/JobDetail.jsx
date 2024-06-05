@@ -1,10 +1,8 @@
-// JobDetail.js
-
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { fetchJobById } from '../actions/jobActions';
-import { applyToJob } from '../actions/userActions';
+import { fetchJobById } from '../../actions/jobActions';
+import { applyToJob } from '../../actions/userActions';
 
 const JobDetail = () => {
   const { id } = useParams();

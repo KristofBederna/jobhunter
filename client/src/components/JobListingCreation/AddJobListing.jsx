@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createJob } from '../actions/jobActions';
+import { createJob } from '../../actions/jobActions';
 import { Range, getTrackBackground } from 'react-range';
 
 const AddJobListing = () => {
@@ -41,9 +41,8 @@ const AddJobListing = () => {
       ...formData,
       salaryFrom: Number(formData.salaryFrom),
       salaryTo: Number(formData.salaryTo),
-      homeOffice: formData.homeOffice // Ensure homeOffice is boolean
+      homeOffice: formData.homeOffice
     };
-    console.log('Submitting job data:', jobData); // Log jobData before dispatching
     dispatch(createJob(jobData));
   };
 

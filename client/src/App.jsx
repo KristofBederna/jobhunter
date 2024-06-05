@@ -8,8 +8,8 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import ManageJob from './pages/ManageJob';
-import JobList from './components/JobList';
-import JobDetail from './components/JobDetail';
+import JobList from "./components/MainPage/JobList";
+import JobDetail from './components/JobListing/JobDetail';
 
 function App() {
   const user = useSelector((state) => state.user); // Access user data from Redux store

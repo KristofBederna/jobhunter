@@ -4,9 +4,9 @@ import { fetchUserProfile, fetchUserExperiences, modifyUserExperience } from '..
 import { fetchJobsByUserId, deleteJob, modifyJob } from '../actions/jobActions';
 import { fetchApplicants } from '../actions/applicantActions';
 import { useNavigate } from 'react-router-dom';
-import ProfileHeader from '../components/ProfileHeader';
-import JobListings from '../components/JobListings';
-import ExperienceListing from '../components/ExperienceListings';
+import ProfileHeader from '../components/Profile/ProfileHeader';
+import JobListings from '../components/Profile/Company/JobListings';
+import ExperienceListing from '../components/Profile/Jobseeker/ExperienceListings';
 
 const Profile = () => {
   const dispatch = useDispatch();
