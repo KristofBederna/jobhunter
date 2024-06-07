@@ -261,8 +261,7 @@ Az elkészült program beadása a Canvasen történik, és két dolgot kell ide 
 - [x] Munkáltató - Álláshirdetés hozzáadása: Álláshirdetés hozzáadása működik (2pt)
 - [x] Munkáltató - Profilom: Álláshirdetés szerkesztése működik (2pt)
 - [x] Profilom: Kijelentkezés gomb működik(1pt)
-- [ ] Igényes megjelenés (2pt)
-30/30
+- [x] Igényes megjelenés (2pt)
 Összesen: 30 pont (Minimum: 12 pont)
 
 - [ ] Plusz feladat: az álláshirdetések listája infinite-scrollinggal jelenik meg (+2pt)
