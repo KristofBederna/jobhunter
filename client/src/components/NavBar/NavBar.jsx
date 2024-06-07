@@ -19,33 +19,24 @@ const NavBar = () => {
       <style>
         {`
           nav {
-            background-color: #f9f9f9;
-            border-bottom: 5px solid #213547;
+            background-color: #213547;
+            border-bottom: 5px solid #f9f9f9;
             display: flex;
-            justify-content: space-between;
             align-items: center;
             padding: 10px;
-          }
-          nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
           }
           nav li {
             display: inline-block;
             margin-right: 10px;
           }
           nav a {
-            color: #213547;
+            color: #f9f9f9;
             text-decoration: none;
             font-size: 25px;
+            margin-right: 40px;
           }
-          nav button {
-            background-color: transparent;
-            border: none;
-            color: #213547;
-            cursor: pointer;
-            font-size: 25px;
+            .background {
+            margin: 15px;
           }
         `}
       </style>
@@ -68,7 +59,7 @@ const NavBar = () => {
               <Link to="/Profile">My Profile</Link>
             </li>
             <li>
-              <button onClick={handleLogout}>Logout</button>
+              <Link to="/Login" onClick={handleLogout}>Logout</Link>
             </li>
           </>
         ) : user.role === 'company' ? (
@@ -80,7 +71,7 @@ const NavBar = () => {
               <Link to="/ManageJob">Add Job Listing</Link>
             </li>
             <li>
-              <button onClick={handleLogout}>Logout</button>
+              <Link to="/Login" onClick={handleLogout}>Logout</Link>
             </li>
           </>
         ) : null}

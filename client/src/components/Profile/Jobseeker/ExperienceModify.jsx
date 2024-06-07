@@ -2,6 +2,22 @@ import React from 'react';
 
 const ExperienceModify = ({ experienceFormData, handleFormChangeExperience, handleFormSubmitExperience }) => (
   <form onSubmit={handleFormSubmitExperience}>
+    <style>
+      {`
+      form {
+        margin-bottom: 20px;
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        box-sizing: border-box;
+      }
+    `}
+    </style>
     <input
       type="text"
       name="company"

@@ -24,17 +24,44 @@ const JobDetail = () => {
   if (!job) return <p>No job found</p>;
 
   return (
-    <div>
-      {user.id ? <button onClick={handleApply}>Apply</button> : <></>}
-      <h2>{job.company}</h2>
-      <p>{job.position}</p>
-      <p>{job.description}</p>
-      <p>{job.salaryFrom} - {job.salaryTo}</p>
-      <p>{job.type}</p>
-      <p>{job.city}</p>
-      <p>{job.homeOffice % 2 === 0 ? 'No' : 'Yes'}</p>
-      <p id='success'></p>
-    </div>
+    <>
+      <style>
+        {`
+        .container {
+        padding: 20px;
+        }
+      h2 {
+        color: #213547;
+        font-size: 25px;
+      }
+      button {
+        background-color: #213547;
+        color: white;
+        border: none;
+        border-radius: 3px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      p {
+        margin-bottom: 10px;
+      }
+    `}
+      </style>
+      <div className='container'>
+        {user.id ? <button onClick={handleApply}>Apply</button> : null}
+        <h2>{job.company}</h2>
+        <p>{job.position}</p>
+        <p>{job.description}</p>
+        <p>Salary Range: {job.salaryFrom} - {job.salaryTo}</p>
+        <p>Type: {job.type}</p>
+        <p>City: {job.city}</p>
+        <p>Home Office: {job.homeOffice % 2 === 0 ? 'No' : 'Yes'}</p>
+      </div>
+    </>
   );
 };
 

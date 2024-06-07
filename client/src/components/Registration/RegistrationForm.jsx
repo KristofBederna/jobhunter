@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const RegistrationForm = () => {
-  const [role, setRole] = useState('employee'); // Toggle between 'employee' and 'employer'
+  const [role, setRole] = useState('employee');
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
@@ -13,7 +13,6 @@ const RegistrationForm = () => {
 
   const handleToggle = (e) => {
     setRole(e.target.value);
-    // Reset work experience when toggling
     setFormData((prevFormData) => ({
       ...prevFormData,
       workExperience: '',
@@ -31,8 +30,6 @@ const RegistrationForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
-
-    // Format work experience into an array of experience objects
     let experiences;
     if (formData.workExperience) {
       experiences = formData.workExperience.split('\n').map((line) => {
@@ -46,8 +43,6 @@ const RegistrationForm = () => {
       password: formData.password,
       strategy: "local"
     };
-
-    // Register user
     const userData = {
       email: formData.email,
       password: formData.password,
@@ -73,7 +68,6 @@ const RegistrationForm = () => {
     console.log('User registered:', registeredUser);
 
     try {
-      // Authenticate user and retrieve JWT token
       const authResponse = await fetch("http://localhost:3030/authentication", {
         method: 'POST',
         headers: {
@@ -90,8 +84,6 @@ const RegistrationForm = () => {
 
       const authData = await authResponse.json();
       console.log('Authentication successful:', authData);
-
-      // Extract JWT token from the response
       const accessToken = authData.accessToken;
 
       if (!accessToken) {
@@ -99,8 +91,6 @@ const RegistrationForm = () => {
         throw new Error('Access token not found');
       }
 
-      console.log('Access token:', accessToken);
-      // Add experiences if applicable
       if (role === 'employee' && experiences) {
         for (const experience of experiences) {
           const experienceResponse = await fetch("http://localhost:3030/experiences", {
@@ -131,8 +121,76 @@ const RegistrationForm = () => {
 
   return (
     <div>
+      <style>
+        {`
+  .registration-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+    .selectionButtons {
+    margin-left: 5rem;
+    }
+    form {
+    padding: 5rem;
+    }
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .radio-group {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .radio-group label {
+    margin: 0 10px;
+  }
+  form div {
+    margin-bottom: 15px;
+  }
+  form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  input[type="email"],
+  input[type="password"],
+  input[type="text"],
+  textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+  }
+  textarea {
+    height: 100px;
+  }
+  button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: #213547;
+    color: white;
+    font-size: 16px;
+  }
+  button:hover {
+    background-color: #0056b3;
+  }
+        `}
+      </style>
       <h2>Registration</h2>
-      <div>
+      <div className='selectionButtons'>
         <label>
           <input
             type="radio"

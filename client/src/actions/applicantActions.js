@@ -8,7 +8,6 @@ export const fetchApplicants = (params) => async (dispatch) => {
   dispatch({ type: FETCH_APPLICANTS_REQUEST });
 
   try {
-    const query = new URLSearchParams(params).toString();
     const response = await fetch(`http://localhost:3030/applicants?jobId=${params}`, {
       method: 'GET',
       headers: {

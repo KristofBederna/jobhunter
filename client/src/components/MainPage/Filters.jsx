@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { fetchJobs } from '../../actions/jobActions';
 
-const Filters = ({ searchQuery, filters, setFilters }) => {
+const Filters = ({ searchQuery, filters, setFilters, setSearchQuery }) => {
   const dispatch = useDispatch();
 
   const handleFilterChange = (e) => {
@@ -53,6 +53,11 @@ const Filters = ({ searchQuery, filters, setFilters }) => {
   };
   return (
     <>
+      <style>
+        {`
+          
+        `}
+      </style>
       <form onSubmit={handleSearchSubmit}>
         <div>
           <label>

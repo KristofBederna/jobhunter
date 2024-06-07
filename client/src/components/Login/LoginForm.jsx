@@ -55,6 +55,66 @@ const LoginForm = () => {
   };
   return (
     <>
+      <style>
+        {`
+          body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+  }
+    form {
+    padding: 5rem;
+    }
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .radio-group {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .radio-group label {
+    margin: 0 10px;
+  }
+  form div {
+    margin-bottom: 15px;
+  }
+  form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  input[type="email"],
+  input[type="password"],
+  input[type="text"],
+  textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+  }
+  textarea {
+    height: 100px;
+  }
+  button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: #213547;
+    color: white;
+    font-size: 16px;
+  }
+  button:hover {
+    background-color: #0056b3;
+  }
+        `}
+      </style>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>

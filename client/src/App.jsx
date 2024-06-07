@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
-import './App.css'
 import Home from './pages/Home';
 import NoPage from './pages/NoPage';
 import Layout from './pages/Layout';
@@ -12,7 +11,7 @@ import JobList from "./components/MainPage/JobList";
 import JobDetail from './components/JobListing/JobDetail';
 
 function App() {
-  const user = useSelector((state) => state.user); // Access user data from Redux store
+  const user = useSelector((state) => state.user);
 
   return (
     <BrowserRouter>
@@ -25,7 +24,7 @@ function App() {
               <Route path="/login" element={<Login />} />
             </>
           ) : null}
-          {user.id ? ( // Check if user is logged in
+          {user.id ? (
             <>
               <Route path="/profile" element={<Profile />} />
               {user.role === 'company' && <Route path='/manageJob' element={<ManageJob />} />}

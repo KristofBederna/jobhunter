@@ -47,7 +47,57 @@ const AddJobListing = () => {
   };
 
   return (
-    <div>
+    <div className='form-container'>
+      <style>{`
+        .form-container {
+          max - width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+  }
+        h1 {
+          text - align: center;
+        margin-bottom: 20px;
+  }
+        form div {
+          margin - bottom: 15px;
+  }
+        form label {
+          display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+  }
+        form input[type="text"],
+        form input[type="number"],
+        form textarea,
+        form select {
+          width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        box-sizing: border-box;
+  }
+        form textarea {
+          height: 100px;
+  }
+        button {
+          width: 100%;
+        padding: 10px;
+        margin-top: 20px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        background-color: #213547;
+        color: white;
+        font-size: 16px;
+  }
+        button:hover {
+        background-color: #0056b3;
+        }
+`}
+      </style>
+
       <h1>New listing</h1>
       <form onSubmit={handleSubmit}>
         <div>

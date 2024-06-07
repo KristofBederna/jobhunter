@@ -1,5 +1,3 @@
-// userReducer.js
-
 import {
   SET_USER,
   CLEAR_USER,
@@ -11,8 +9,8 @@ import {
   FETCH_USER_EXPERIENCES_FAILURE,
   APPLY_TO_JOB_REQUEST,
   APPLY_TO_JOB_SUCCESS,
-  APPLY_TO_JOB_FAILURE,
-} from '../actions/userActions';
+  APPLY_TO_JOB_FAILURE
+} from '../actions/userActionTypes';
 
 const initialState = {
   id: null,
