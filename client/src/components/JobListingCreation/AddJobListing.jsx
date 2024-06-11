@@ -131,7 +131,6 @@ const AddJobListing = () => {
               name="description"
               value={formData.description}
               onChange={handleChange}
-              required
             />
           </label>
         </div>
@@ -154,9 +153,9 @@ const AddJobListing = () => {
                       width: '100%',
                       background: getTrackBackground({
                         values: salaryRange,
-                        colors: ['#ccc', '#548BF4', '#ccc'],
+                        colors: ['#ccc', '#213547', '#ccc'],
                         min: 0,
-                        max: 100000
+                        max: 10000000
                       }),
                       alignSelf: 'center'
                     }}
@@ -172,7 +171,7 @@ const AddJobListing = () => {
                       height: '24px',
                       width: '24px',
                       borderRadius: '12px',
-                      backgroundColor: '#548BF4',
+                      backgroundColor: '#213547',
                       display: 'flex',
                       justifyContent: 'center',
                       alignItems: 'center'
@@ -188,7 +187,7 @@ const AddJobListing = () => {
                         fontFamily: 'Arial,Helvetica Neue,Helvetica,sans-serif',
                         padding: '4px',
                         borderRadius: '4px',
-                        backgroundColor: '#548BF4'
+                        backgroundColor: '#213547'
                       }}
                     >
                       {salaryRange[index]}

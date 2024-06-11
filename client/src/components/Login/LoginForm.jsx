@@ -8,6 +8,7 @@ const LoginForm = () => {
     email: '',
     password: '',
   });
+  const [errors, setErrors] = useState([]);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,8 +37,16 @@ const LoginForm = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        if (response.status === 401) {
+          setErrors(prevErrors => [...prevErrors, "Invalid email or password"]);
+          return;
+        } else {
+          setErrors(prevErrors => [...prevErrors, "Error during authentication"]);
+          return;
+        }
       }
+
+      setErrors([]);
 
       const data = await response.json();
 
@@ -142,6 +151,7 @@ const LoginForm = () => {
           </label>
         </div>
         <button type="submit">Login</button>
+        {errors && errors.length > 0 && errors.map((error, index) => <p key={index}>{error}</p>)}
       </form>
     </>
   );

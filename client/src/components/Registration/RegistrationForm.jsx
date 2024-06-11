@@ -10,6 +10,7 @@ const RegistrationForm = () => {
     fullname: '',
     workExperience: '',
   });
+  const [errors, setErrors] = useState([]);
 
   const handleToggle = (e) => {
     setRole(e.target.value);
@@ -30,14 +31,41 @@ const RegistrationForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
+    setErrors([]);
+    if (formData.fullname.split(" ").length < 2) {
+      setErrors(prevErrors => [...prevErrors, "Full name must be at least 2 words long"]);
+    }
     let experiences;
     if (formData.workExperience) {
-      experiences = formData.workExperience.split('\n').map((line) => {
-        const [company, title, interval] = line.split(';');
-        return { company: company.trim(), title: title.trim(), interval: interval.trim() };
-      });
+      try {
+        experiences = formData.workExperience.split('\n').map((line) => {
+          const [company, title, interval] = line.split(';');
+          if (!company || !title || !interval) {
+            throw new Error('Invalid format');
+          }
+
+          if (!interval.includes("-")) {
+            setErrors(prevErrors => [...prevErrors, "Interval must be an interval"]);
+            throw new Error('Invalid format');
+          }
+
+          const [start, end] = interval.split("-").map(part => part.trim());
+          if (isNaN(Number(start)) || isNaN(Number(end))) {
+            setErrors(prevErrors => [...prevErrors, "Interval must contain numeric values"]);
+            throw new Error('Invalid format');
+          }
+
+          return { company: company.trim(), title: title.trim(), interval: interval.trim() };
+        });
+      } catch (error) {
+        setErrors(prevErrors => [...prevErrors, "Work experience must be in the format company;position;from-to"]);
+        return;
+      }
     }
 
+    if (errors.length > 0) {
+      return;
+    }
     const authenticationData = {
       email: formData.email,
       password: formData.password,
@@ -264,6 +292,8 @@ const RegistrationForm = () => {
         )}
 
         <button type="submit">Register</button>
+
+        {errors && errors.length > 0 && errors.map((error, index) => <p key={index}>{error}</p>)}
       </form>
     </div>
   );

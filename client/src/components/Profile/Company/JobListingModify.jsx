@@ -5,6 +5,7 @@ const JobListingModify = ({ jobFormData, handleFormChange, handleFormSubmit }) =
 
     <form onSubmit={handleFormSubmit}>
       <input
+        required="true"
         type="text"
         name="company"
         value={jobFormData.company}
@@ -12,6 +13,7 @@ const JobListingModify = ({ jobFormData, handleFormChange, handleFormSubmit }) =
         placeholder="Company"
       />
       <input
+        required="true"
         type="text"
         name="position"
         value={jobFormData.position}
@@ -25,6 +27,7 @@ const JobListingModify = ({ jobFormData, handleFormChange, handleFormSubmit }) =
         placeholder="Description"
       />
       <input
+        required="true"
         type="number"
         name="salaryFrom"
         value={jobFormData.salaryFrom}
@@ -32,6 +35,7 @@ const JobListingModify = ({ jobFormData, handleFormChange, handleFormSubmit }) =
         placeholder="Salary From"
       />
       <input
+        required="true"
         type="number"
         name="salaryTo"
         value={jobFormData.salaryTo}
@@ -39,6 +43,7 @@ const JobListingModify = ({ jobFormData, handleFormChange, handleFormSubmit }) =
         placeholder="Salary To"
       />
       <select
+        required="true"
         name="type"
         value={jobFormData.type}
         onChange={handleFormChange}
@@ -48,6 +53,7 @@ const JobListingModify = ({ jobFormData, handleFormChange, handleFormSubmit }) =
         <option value="internship">Internship</option>
       </select>
       <input
+        required="true"
         type="text"
         name="city"
         value={jobFormData.city}
